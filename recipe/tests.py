@@ -20,3 +20,9 @@ class RecipeViewsTest(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertTemplateUsed(response, 'main.html')
         self.assertEqual(len(response.context['recipes']), 10)
+        
+    def test_category_detail_view(self):
+        response = self.client.get(reverse('category_detail', kwargs={'id': self.category.id}))
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'category_detail.html')
+        self.assertEqual(response.context['category'], self.category)
